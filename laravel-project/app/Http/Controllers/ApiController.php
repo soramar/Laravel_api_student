@@ -23,16 +23,46 @@ class ApiController extends Controller
     ], 201);
  }
 
-//  public function show($id){
+ public function show($id){
+    if(Student::where('id', $id)->exists()){
+        $student = Student::where('id', $id)->get()->toJson(JSON_PRETTY_PRINT);
+        return response($student, 200);
+    }else{
+        return response()->json([
+            "message" => "Student not found"
+        ], 400);
+    }
+ }
 
-//  }
+ public function update(Request $request ,$id){
+    if(Student::where('id', $id)->exists()){
+       $student = Student::find($id);
+       $student->name = is_null($student->name) ? $student->name : $request->name;
+       $student->course = is_null($student->course) ? $student->course : $request->course;
+       $student->save();
 
-//  public function update(Request $request){
+       return response()->json([
+            "message" => "records updated successfully"
+       ], 200);
+    }else{
+        return response()->json([
+            "message" => "Student not found"
+        ], 404);
+    }
+ }
 
-//  }
+ public function delete($id){
+    if(Student::where('id', $id)->exists()){
+        $student = Student::find($id);
+        $student->delete();
 
-//  public function delete($id){
-
-//  }
-
+        return response()->json([
+            "message" => "records delete"
+        ], 202);
+    }else{
+        return response()->json([
+            "message" => "Student not found"
+        ], 404);
+    }
+ }
 }
