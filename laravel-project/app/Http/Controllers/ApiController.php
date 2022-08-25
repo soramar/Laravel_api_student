@@ -23,16 +23,23 @@ class ApiController extends Controller
     ], 201);
  }
 
-//  public function show($id){
+ public function show($id){
+    if(Student::where('id', $id)->exists()){
+        $student = Student::where('id', $id)->get()->toJson(JSON_PRETTY_PRINT);
+        return response($student, 200);
+    }else{
+        return response()->json([
+            "message" => "Student not found"
+        ], 400);
+    }
+ }
 
-//  }
+ public function update(Request $request){
 
-//  public function update(Request $request){
+ }
 
-//  }
+ public function delete($id){
 
-//  public function delete($id){
-
-//  }
+ }
 
 }
