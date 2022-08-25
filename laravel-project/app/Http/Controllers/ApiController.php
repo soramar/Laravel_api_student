@@ -46,13 +46,23 @@ class ApiController extends Controller
        ], 200);
     }else{
         return response()->json([
-            "message" => "Student not fount"
+            "message" => "Student not found"
         ], 404);
     }
  }
 
  public function delete($id){
+    if(Student::where('id', $id)->exists()){
+        $student = Student::find($id);
+        $student->delete();
 
+        return response()->json([
+            "message" => "records delete"
+        ], 202);
+    }else{
+        return response()->json([
+            "message" => "Student not found"
+        ], 404);
+    }
  }
-
 }
