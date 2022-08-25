@@ -15,5 +15,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+  return $request->user();  
+  Route::get('students', 'ApiController@index');
+  Rpute::get('students/{id}', 'ApiController@show');
+  Route::post('students', 'ApiController@create');
+  Route::put('student/{id}', 'ApiController@update');
+  Route::delete('students/{id}', 'ApiController@delete');
 });
