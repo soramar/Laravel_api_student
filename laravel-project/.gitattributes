@@ -1,4 +1,4 @@
-* text=auto
+* text=php
 
 *.blade.php diff=html
 *.css diff=css
