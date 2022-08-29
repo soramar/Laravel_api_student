@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Student;
+use App\Http\Requests\FormStudent;
+use Illuminate\Support\Facades\Validator;
 
 class ApiController extends Controller
 {
@@ -12,7 +14,7 @@ class ApiController extends Controller
     return response($students, 200);
  }
 
- public function create(Request $request){
+ public function create(FormStudent $request){
     $student = new Student;
     $student->name = $request->name;
     $student->course = $request->course;
